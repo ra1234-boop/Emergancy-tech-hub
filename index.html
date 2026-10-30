@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Emergency Tech Hub shares public-safety awareness, emergency technology information and preparedness tips for South Africa.">
+  <meta name="theme-color" content="#101216">
+  <title>Emergency Tech Hub | Be Prepared. Stay Informed. Stay Safe.</title>
+  <style>
+    :root {
+      --bg: #0b0e12;
+      --panel: #141920;
+      --panel-light: #1b232c;
+      --text: #f4f6f8;
+      --muted: #aab4bf;
+      --red: #e32636;
+      --red-dark: #a91625;
+      --line: rgba(255,255,255,.11);
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Arial, Helvetica, sans-serif; line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .topline { height: 4px; background: linear-gradient(90deg, var(--red), #ff6672, transparent); }
+    header {
+      position: sticky; top: 0; z-index: 20; background: rgba(11,14,18,.94);
+      backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .5px; }
+    .brand-mark {
+      width: 42px; height: 42px; border: 2px solid var(--red); border-radius: 50%;
+      display: grid; place-items: center; color: white; font-size: 14px; font-weight: 900;
+      box-shadow: 0 0 22px rgba(227,38,54,.18);
+    }
+    .brand small { display: block; color: var(--muted); font-size: 10px; letter-spacing: 2px; font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-links a { color: #d5dbe1; font-size: 13px; font-weight: 700; }
+    .nav-links a:hover { color: #ff6571; }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--red); color: white; padding: 12px 18px; border-radius: 6px;
+      font-weight: 800; font-size: 13px; border: 1px solid var(--red); transition: .2s;
+    }
+    .nav-cta:hover, .button:hover { background: #ff3447; transform: translateY(-2px); }
+    .menu-toggle { display: none; background: none; color: white; border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; font-size: 20px; }
+    .hero { position: relative; min-height: 570px; display: flex; align-items: center; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(7,10,14,.98) 0%, rgba(7,10,14,.86) 43%, rgba(7,10,14,.35) 100%),
+        url("images/emergency-tech-hub-banner.png") center/cover no-repeat;
+      opacity: .92;
+    }
+    .hero::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 5px; background: linear-gradient(90deg,var(--red),transparent 75%); }
+    .hero-content { position: relative; z-index: 1; max-width: 690px; padding: 85px 0; }
+    .eyebrow { color: #ff6975; font-size: 12px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+    h1 { font-size: clamp(42px, 7vw, 76px); line-height: .99; margin: 18px 0; letter-spacing: -2.5px; }
+    h1 span, .accent { color: var(--red); }
+    .hero p { color: #d0d7df; font-size: 18px; max-width: 610px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button.secondary { background: transparent; border-color: rgba(255,255,255,.35); }
+    .button.secondary:hover { background: rgba(255,255,255,.1); }
+    .trust-strip { background: #11161d; border-bottom: 1px solid var(--line); }
+    .trust-inner { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; padding: 20px 0; text-align: center; }
+    .trust-inner strong { display: block; font-size: 12px; letter-spacing: 1.4px; }
+    .trust-inner span { color: var(--muted); font-size: 11px; }
+    section { padding: 88px 0; }
+    .section-head { max-width: 720px; margin-bottom: 34px; }
+    .section-head h2 { font-size: clamp(30px,4vw,43px); line-height: 1.1; margin: 10px 0 12px; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-image { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--panel); }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-copy p { color: var(--muted); }
+    .check-list { padding: 0; margin: 22px 0 0; list-style: none; }
+    .check-list li { margin: 12px 0; padding-left: 28px; position: relative; }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; color: #ff5968; font-weight: 900; }
+    .dark-section { background: #10151b; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+      overflow: hidden; transition: .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(227,38,54,.55); }
+    .card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .card-body { padding: 22px; }
+    .card-body h3 { margin: 0 0 8px; font-size: 19px; }
+    .card-body p { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+    .read-more { color: #ff6571; font-size: 12px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+    .numbers { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 26px; }
+    .number-card { background: #191f27; border: 1px solid var(--line); padding: 23px; border-radius: 9px; }
+    .number-card small { color: var(--muted); display: block; text-transform: uppercase; letter-spacing: 1.2px; font-size: 10px; font-weight: 800; }
+    .number-card a { color: white; font-size: 32px; font-weight: 900; display: block; margin: 5px 0; }
+    .number-card p { color: var(--muted); font-size: 12px; margin: 0; }
+    .notice { border-left: 3px solid var(--red); background: rgba(227,38,54,.08); padding: 15px 18px; color: #dce1e6; font-size: 13px; margin-top: 20px; }
+    .gallery { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .gallery a { display: block; overflow: hidden; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); }
+    .gallery img { width: 100%; height: 220px; object-fit: cover; transition: .25s; }
+    .gallery a:hover img { transform: scale(1.04); }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; }
+    .contact-panel, .contact-form { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
+    .contact-panel p, .contact-panel li { color: var(--muted); }
+    .contact-panel ul { padding-left: 18px; }
+    label { display: block; font-size: 12px; font-weight: 800; margin: 14px 0 6px; color: #e5e9ed; }
+    input, textarea {
+      width: 100%; padding: 13px 14px; background: #0d1116; color: white;
+      border: 1px solid #303944; border-radius: 6px; font: inherit; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--red); }
+    textarea { min-height: 130px; resize: vertical; }
+    .contact-form button { margin-top: 16px; cursor: pointer; }
+    .form-note { color: var(--muted); font-size: 11px; margin-top: 12px; }
+    footer { background: #080a0d; border-top: 1px solid var(--line); padding: 35px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer p { color: var(--muted); font-size: 12px; margin: 5px 0; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #d5dbe1; }
+    .disclaimer { color: #87919c; font-size: 11px; max-width: 760px; margin-top: 22px; }
+    @media (max-width: 850px) {
+      .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; padding: 20px; background: #10151b; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; }
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: block; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2,1fr); }
+      .gallery { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .hero { min-height: 530px; }
+      .hero-content { padding: 70px 0; }
+      .hero p { font-size: 16px; }
+      .trust-inner { grid-template-columns: 1fr; gap: 12px; }
+      section { padding: 65px 0; }
+      .cards, .numbers { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .gallery img { height: 150px; }
+      .contact-panel, .contact-form { padding: 20px; }
+      h1 { letter-spacing: -1.5px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Emergency Tech Hub home">
+        <span class="brand-mark">ET</span>
+        <span>EMERGENCY <span class="accent">TECH HUB</span><small>SOUTH AFRICA</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#topics">TOPICS</a>
+        <a href="#preparedness">BE PREPARED</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Public safety • Emergency awareness • Technology</div>
+          <h1>BE READY.<br><span>STAY INFORMED.</span></h1>
+          <p>Making emergency services, safety information and useful technology easier to understand for people across South Africa.</p>
+          <div class="hero-actions">
+            <a class="button" href="#topics">EXPLORE THE HUB</a>
+            <a class="button secondary" href="#preparedness">EMERGENCY CONTACTS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-inner">
+        <div><strong>BE PREPARED</strong><span>Know what to do before an emergency.</span></div>
+        <div><strong>STAY INFORMED</strong><span>Understand services and useful technology.</span></div>
+        <div><strong>STAY SAFE</strong><span>Use reliable information and trusted sources.</span></div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-image">
+          <img src="images/emergency-tech-hub-brand.png" alt="Emergency Tech Hub emergency awareness branding">
+        </div>
+        <div class="about-copy">
+          <div class="eyebrow">ABOUT THE PLATFORM</div>
+          <h2>Knowledge can make a <span class="accent">difference.</span></h2>
+          <p><strong>Emergency Tech Hub</strong> is an independent information and awareness platform with a South African focus. It explores how emergency services work, how technology supports them, and how members of the public can become better prepared.</p>
+          <p>The aim is to share clear, practical and responsible information in a way that is accessible to everyone.</p>
+          <ul class="check-list">
+            <li>Emergency services and their roles</li>
+            <li>Communication systems and emergency technology</li>
+            <li>First-aid awareness and personal preparedness</li>
+            <li>Public safety information and verified updates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="topics">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">EXPLORE THE HUB</div>
+          <h2>Information that <span class="accent">matters.</span></h2>
+          <p>Explore key topics connected to emergency response, public safety and technology in South Africa.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <img src="images/emergency-services.png" alt="Infographic about emergency services and their roles">
+            <div class="card-body">
+              <h3>Emergency Services</h3>
+              <p>Learn about ambulance and EMS, fire services, police, sea rescue and disaster management.</p>
+              <a class="read-more" href="#preparedness">LEARN MORE →</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="images/emergency-technology.png" alt="Infographic about technology supporting emergency services">
+            <div class="card-body">
+              <h3>Emergency Technology</h3>
+              <p>Discover how communication centres, radio systems, digital dispatch and location tools support responders.</p>
+              <a class="read-more" href="#gallery">VIEW INFOGRAPHIC →</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="images/medical-info-phones.png" alt="Infographic about medical information on Samsung and iPhone">
+            <div class="card-body">
+              <h3>Phone Safety Features</h3>
+              <p>Understand how emergency and medical information features on smartphones can support preparedness.</p>
+              <a class="read-more" href="#gallery">VIEW INFOGRAPHIC →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="preparedness">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">SOUTH AFRICAN QUICK REFERENCE</div>
+          <h2>Emergency <span class="accent">numbers.</span></h2>
+          <p>Save the relevant contact numbers for your area. Tap a number on a mobile phone to call.</p>
+        </div>
+        <div class="numbers">
+          <div class="number-card"><small>Cellphone emergencies</small><a href="tel:112">112</a><p>Emergency call number from a cellphone.</p></div>
+          <div class="number-card"><small>Police emergencies</small><a href="tel:10111">10111</a><p>South African Police Service emergency line.</p></div>
+          <div class="number-card"><small>Ambulance</small><a href="tel:10177">10177</a><p>Ambulance emergency services.</p></div>
+        </div>
+        <div class="notice"><strong>Important:</strong> Emergency Tech Hub is an independent information platform. It is not an emergency call centre and cannot dispatch assistance. In a real emergency, contact the relevant emergency service directly. Numbers and availability can vary by area and network; check local official sources. For Cape Town, the City also lists 107 from a landline and 021 480 7700 for emergencies.</div>
+        <p style="color:var(--muted);font-size:12px;margin-top:16px">When calling, clearly give the location, explain what happened, provide a callback number if requested, and follow the call-taker's instructions.</p>
+        <p><a class="read-more" href="https://www.westerncape.gov.za/know-who-you-can-call-emergency" target="_blank" rel="noopener">WESTERN CAPE GOVERNMENT: EMERGENCY CONTACTS →</a></p>
+        <p><a class="read-more" href="https://www.saps.gov.za/services/cc_10111.php" target="_blank" rel="noopener">SAPS: 10111 INFORMATION →</a></p>
+      </div>
+    </section>
+
+    <section class="dark-section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">FROM THE HUB</div>
+          <h2>Awareness & <span class="accent">visual guides.</span></h2>
+          <p>A selection of Emergency Tech Hub graphics and educational visuals.</p>
+        </div>
+        <div class="gallery">
+          <a href="images/emergency-tech-hub-banner.png" target="_blank" rel="noopener"><img src="images/emergency-tech-hub-banner.png" alt="Emergency Tech Hub South Africa banner"></a>
+          <a href="images/emergency-tech-hub-brand.png" target="_blank" rel="noopener"><img src="images/emergency-tech-hub-brand.png" alt="Emergency Tech Hub brand graphic"></a>
+          <a href="images/emergency-technology.png" target="_blank" rel="noopener"><img src="images/emergency-technology.png" alt="Technology powering emergency services infographic"></a>
+          <a href="images/medical-info-phones.png" target="_blank" rel="noopener"><img src="images/medical-info-phones.png" alt="Medical information on Samsung and iPhone infographic"></a>
+          <a href="images/emergency-services.png" target="_blank" rel="noopener"><img src="images/emergency-services.png" alt="Emergency services infographic"></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">GET IN TOUCH</div>
+          <h2>Contact <span class="accent">the hub.</span></h2>
+          <p>Questions, suggestions or useful public-safety information are welcome.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-panel">
+            <h3>Emergency Tech Hub</h3>
+            <p>South Africa-focused emergency awareness and technology information.</p>
+            <p><strong>Email</strong><br><a class="accent" id="emailLink" href="mailto:emergencytechhub@gmail.com">emergencytechhub@gmail.com</a></p>
+            <p style="font-size:12px">Please use email for general enquiries only. Do not send urgent emergency requests through this website.</p>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <h3>Send an enquiry</h3>
+            <label for="visitorName">Your name</label>
+            <input id="visitorName" name="visitorName" type="text" placeholder="Enter your name" required>
+            <label for="visitorEmail">Your email address</label>
+            <input id="visitorEmail" name="visitorEmail" type="email" placeholder="name@example.com" required>
+            <label for="visitorMessage">Message</label>
+            <textarea id="visitorMessage" name="visitorMessage" placeholder="Write your message..." required></textarea>
+            <button class="button" type="submit">OPEN EMAIL APP</button>
+            <p class="form-note">This form opens your device's email app with your message filled in. It does not store or send information on this website.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a class="brand" href="#home"><span class="brand-mark">ET</span><span>EMERGENCY <span class="accent">TECH HUB</span><small>BE PREPARED • STAY INFORMED • STAY SAFE</small></span></a>
+          <p>Independent public-safety awareness platform | South Africa</p>
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a><a href="#topics">Topics</a><a href="#preparedness">Emergency numbers</a><a href="#contact">Contact</a>
+        </div>
+      </div>
+      <p class="disclaimer">Information on this website is for general awareness and educational purposes. It is not professional medical, legal or emergency-response advice. Always follow instructions from qualified emergency personnel and consult official sources for current local information.</p>
+      <p style="margin-top:20px">© <span id="year"></span> Emergency Tech Hub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Change this address if you have a different confirmed public email.
+    const CONTACT_EMAIL = "emergencytechhub@gmail.com";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const emailLink = document.getElementById("emailLink");
+    emailLink.href = "mailto:" + CONTACT_EMAIL;
+    emailLink.textContent = CONTACT_EMAIL;
+
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("visitorName").value.trim();
+      const sender = document.getElementById("visitorEmail").value.trim();
+      const message = document.getElementById("visitorMessage").value.trim();
+      const subject = encodeURIComponent("Website enquiry from " + name);
+      const body = encodeURIComponent("Name: " + name + "\nEmail: " + sender + "\n\n" + message);
+      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
